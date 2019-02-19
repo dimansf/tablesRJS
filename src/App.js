@@ -10,9 +10,22 @@ class App extends Component {
    * @var object 
    */
   state = {
-    current: []
+    current: [],
+    loadStatus: true,
   };
+  /**
+   * 
+   */
+  dataMode = {
+    second:  "http://www.filltext.com/?rows=12&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D",
+    first:  "http://www.filltext.com/?rows=1000&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&delay=3&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D"
 
+  };
+  /**
+   * 
+   * @param {*} props 
+   */
+  fullTableData = {};
     
   /**
    * Base constructor
@@ -20,8 +33,6 @@ class App extends Component {
    */
   constructor(props) {
     super(props);
-    this.shortData = "http://www.filltext.com/?rows=12&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D";
-    this.bigData = "http://www.filltext.com/?rows=1000&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&delay=3&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D";
     this.getContent = this.getContent.bind(this);
   }
   /**
@@ -30,37 +41,21 @@ class App extends Component {
    * @return  
    */
   __getContent(url) {
+    this.setState({current: {}, loadStatus: false});
     return fetch(url).then((resp)=> {
       return resp.json();
-
-    }).then(res => this.content = res);
-    // }).then((result) => {
-    //    = result;
-    //   console.log(result);
-    // });
+    }).then(res => res);
   }
   /**
    * Получаем json-string контент и сохраняем 
    * @param {object} event
    */
   getContent(dataType) {
-    if('small' === dataType) {
-      this.__getContent(this.shortData).then(() => {
-        this.setState({ current: this.content});
-        console.dir(this.content);
-      })
-    } else {
-      this.__getContent(this.bigData).then(() => {
-        this.setState({ current: this.content});
-        console.dir(this.content);
-        
-      });
-
-    }
-  }
-  tableInfo(e) {
-    console.dir(e);
-
+    this.__getContent(dataType).then((res) => {
+      this.setState({ current: res, loadStatus: true}, () => {console.dir(this.state);});
+      
+    });
+    
   }
   /**
    * Отрисовка главного апа
@@ -70,9 +65,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SfMode updateData={this.getContent}/>
+        <SfMode updateData={this.getContent} dataMode={this.dataMode} loadStatus={this.state.loadStatus}/>
         {/* <SfSearch/> */}
-        <SfTable tableInfo={this.tableInfo} collect={this.state}/>
+        {/* <SfTable tableInfo={this.tableInfo} collect={this.state}/> */}
         {/* <SfDetails/> */}
         {/* <SfLinks/> */}
       </div>

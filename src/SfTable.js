@@ -13,8 +13,6 @@ class SfTable extends React.Component {
      * 
      */
     render() {
-        // var collect = Object.entries(this.props.collect);
-        // console.dir(collect);
         return (
             <div>
                 <table >
@@ -29,9 +27,9 @@ class SfTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.collect.current.map((e, i)=> {
+                        {this.props.collect.current.map(e => {
                             // console.dir(e);
-                            return <tr onClick={()=>{this.props.tableInfo(e.id)}} key={i}> 
+                            return <tr onClick={()=>{this.props.tableInfo(e.id)}} key={e.id}> 
                             <td>{e.id}</td>
                             <td>{e.firstName}</td>
                             <td>{e.lastName}</td>

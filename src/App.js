@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SfMode from './SfMode';
 import SfTable from './SfTable';
+import SfSearch from './SfSearch';
 
 class App extends Component {
   /**
@@ -34,6 +35,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.getContent = this.getContent.bind(this);
+    this.search = this.search.bind(this);
+  }
+  /**
+   * 
+   */
+  search(e) {
+    console.log(e);
   }
   /**
    * Получаем контент из стороннего ресурса
@@ -66,7 +74,7 @@ class App extends Component {
     return (
       <div className="App">
         <SfMode updateData={this.getContent} dataMode={this.dataMode} loadStatus={this.state.loadStatus}/>
-        {/* <SfSearch/> */}
+        <SfSearch search={this.search}/>
         {/* <SfTable tableInfo={this.tableInfo} collect={this.state}/> */}
         {/* <SfDetails/> */}
         {/* <SfLinks/> */}

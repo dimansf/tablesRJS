@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 /**
  * 
  * Input data mode 
@@ -21,19 +23,23 @@ class SfMode extends React.Component {
         if(this.props.loadStatus)
         return (
             <div>
-            <div>
-                <p>Big data</p>
-                <input onClick={() => {this.props.updateData(this.props.dataMode.first)}} type="radio" value='big' name="dataMode"></input>
+            <div >
+                <label> 
+                    <input onClick={() => {this.props.updateData(this.props.dataMode.first)}} type="radio" value='big' name="dataMode"></input>
+                    Big data
+                </label>
             </div>
-            <div>
-                <p>Small data</p>
-                <input onClick={() => {this.props.updateData(this.props.dataMode.second)}} type="radio" value='small' name="dataMode"></input>
+            <div >
+                <label>
+                    <input onClick={() => {this.props.updateData(this.props.dataMode.second)}} type="radio" value='small' name="dataMode"></input>
+                    Small data 
+                </label>
             </div>
         </div>
         );
         else {
             return (
-                <div>
+                <div >
                     <p>Loading data: </p> <span><div className="loader"></div></span>
                 </div>
             );

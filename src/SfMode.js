@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * 
@@ -13,12 +12,6 @@ import './App.css';
 
 class SfMode extends React.Component {
     
-    componentDidUpdate() {
-        this.render();
-    }
-    /** 
-     * 
-     */
     render() {
         if(this.props.loadStatus)
         return (

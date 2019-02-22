@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -9,7 +9,7 @@ class SfSearch extends React.Component {
         this.cText = '';
         // console.log(this.cText);
         this.currentText = this.currentText.bind(this);
-        this.getText = this.getText.bind(this);
+        // this.getText = this.getText.bind(this);
     }
     currentText(e) {
         // console.dir(this);
